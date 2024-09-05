@@ -143,7 +143,7 @@
 
 		function updateQuote(){
 			console.log('updateQuote function is working');
-			nextQuoteBtn_el.innerHTML = 'Contemplating 🦉  <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>'
+			nextQuoteBtn_el.innerHTML = '🦉  <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>'
 			nextQuoteBtn_el.disabled = true;
 			fetch(api_url,options).then(
 				response => {
