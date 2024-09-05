@@ -10,6 +10,11 @@
 		integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 	<style>
 
+
+		:root {
+			--main-bg-color: orange;
+		}
+
                 * {
 			overflow-x: hidden;
 		}
@@ -19,7 +24,7 @@
 		}
 
 		body {
-			background-color: orange;
+			background-color: var(--main-bg-color);
 			color: black;
 			transition: .5s all ease-in-out;
 		}
@@ -44,9 +49,7 @@
 			align-items: center;
 		}
 
-		blockquote {
-			background-color:;
-		}
+
 
 		.blockquote-footer {
 			text-align: right;
@@ -63,13 +66,13 @@
 		<div class="container h-100 ">
 			<div class="main-content my-3">
 				<blockquote class="rounded px-3 py-4 blockquote border border-dark border-2">
-  <p class="mb-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-  <footer class="blockquote-footer">Someone famous in <cite class="text-right" title="Source Title">Source Title</cite></footer>
+  <p class="mb-4" id="quote_el">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+  <footer class="blockquote-footer">Quote by <cite class="text-right" id="author_el"  title="Source Title">Source Title</cite></footer>
 </blockquote>
 <div class='w-100 row' style='display:flex; flex-direction:row; justify-content:right; align-items:center'>
 	<div class='col'></div>
 	<div class='col'></div>
-<button class='py-1 col px-2 text-right button' style='background-color:orange; color:black border border-1 border-dark' >Next</button>
+<button class='py-1 col px-2 text-right button' id='nextQuoteBtn' style='background-color:var(--main-bg-color); color:black border border-1 border-dark' >Next</button>
 </div>
 			</div>
 		</div>
@@ -84,6 +87,93 @@
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
 		integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
 		crossorigin="anonymous"></script>
+	<script>
+		// random color generation
+		console.log('script is working')
+		let rcolor = fetch
+
+		function getRandomColor(){
+
+
+		}
+
+		// dynamic elements
+		const quote_el = document.getElementById('quote_el')
+		const author_el = document.getElementById('author_el')
+
+		const api_url = 'https://api.api-ninjas.com/v1/quotes'
+		const api_key = '2A6+A1Is1ovGtrVDkdOZbQ==kDE4reQxLDCD9f58'
+		const headers = {
+			'Content-Type': 'application/json',
+			'X-Api-Key': '2A6+A1Is1ovGtrVDkdOZbQ==kDE4reQxLDCD9f58'
+		}
+
+		const options = {
+			method: 'GET',
+			headers: headers
+		}
+
+		let quote;
+		let author;
+
+		function getRandomColor(){
+			 const hue = Math.floor(Math.random() * 360); // Any hue
+			 const saturation = Math.floor(Math.random() * 51) + 50; // 50% to 100% saturation
+			 const lightness = Math.floor(Math.random() * 21) + 70; // 70% to 90% lightness
+
+  			 // Create HSL color string
+			 const randomColor = `hsl(${hue}, ${saturation}%, ${lightness}%)`;
+			 return randomColor;
+	}
+
+		function updateApp(quote,author){
+			quote_el.textContent = quote;
+			author_el.textContent = author;
+			// get random color;
+			let randomColor = getRandomColor();
+			// update with random color;
+			document.documentElement.style.setProperty('--main-bg-color',randomColor);
+			
+			nextQuoteBtn_el.innerHTML = 'Next Quote';
+			nextQuoteBtn_el.disabled = false;
+		}
+
+
+		function updateQuote(){
+			console.log('updateQuote function is working');
+			nextQuoteBtn_el.innerHTML = 'Contemplating 🦉  <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>'
+			nextQuoteBtn_el.disabled = true;
+			fetch(api_url,options).then(
+				response => {
+					if(!response.ok){
+						throw new Error(`HTTP error! Status: $(response.status)`)
+					}
+					else {
+						console.log('fetched data');
+					return response.json();
+					}}
+			).then(data => {
+				console.log('Response: ', data);
+				console.log(`Quote :${data[0].quote} Author: ${data[0].author}`)
+				quote = data[0].quote;
+				author = data[0].author;
+				updateApp(quote,author);
+
+			}).catch(
+				error => {
+					console.log('Error fetching data: ', error);
+				}
+			);
+			}
+
+		const nextQuoteBtn_el = document.getElementById('nextQuoteBtn');
+		nextQuoteBtn_el.addEventListener('click', (event)=>{
+			event.preventDefault();
+			console.log('button clicked');
+			updateQuote();
+		})
+
+	</script>
 </body>
 
 </html>
