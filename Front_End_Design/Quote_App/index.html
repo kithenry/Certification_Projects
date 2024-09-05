@@ -88,6 +88,8 @@
 		integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
 		crossorigin="anonymous"></script>
 	<script>
+
+		let firstTime = true;
 		// random color generation
 		console.log('script is working')
 		let rcolor = fetch
@@ -172,6 +174,11 @@
 			console.log('button clicked');
 			updateQuote();
 		})
+
+		if(firstTime){
+			updateQuote();
+			firstTime = false;
+		}
 
 	</script>
 </body>
