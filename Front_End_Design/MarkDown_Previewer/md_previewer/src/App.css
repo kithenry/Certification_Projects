@@ -1,0 +1,15 @@
+.App {
+  text-align: left;
+  margin: auto 60px;
+  margin-top: 30px;
+}
+
+.App h1 {
+	text-align: center;
+}
+
+textarea {
+	font-family: Monospace;
+	font-size: 20px;
+	margin-bottom: 40px;
+}
