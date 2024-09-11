@@ -32,3 +32,14 @@ textarea {
 img {
 	width: 200px;
 }
+
+table {
+	border: 1px solid black;
+}
+
+td, th {
+	padding: 10px;
+	padding-left: 15px;
+	padding-right: 15px;
+	border: 1px solid black;
+}
