@@ -2,7 +2,9 @@
 
 #### V1.0.0
 - basic operation support (addition, subtraction, multiplication & division)
-- ui design
+        - parsing string into algebriac expression.
+        - evaluating expression
+- ui design (done)
 
 #### V1.0.1
 - accounting for edge cases
