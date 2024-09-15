@@ -89,7 +89,7 @@
             <button class="col">2</button>
             <button class="col">3</button>
             <button class="col">-</button>
-            <button class="col border-none">Ans</button>
+            <button class="col border-none" id="ansEl" value=''>Ans</button>
             <!-- Removed equal sign from this row -->
           </div>
           <div class="row">
@@ -110,6 +110,7 @@
            const calcContainer = document.getElementById("calcContainer");
            const inputEl = document.getElementById("inputEl");
            const outputEl = document.getElementById("outputEl");
+	   const ansEl = document.getElementById("ansEl");
            let cursorPosition = 0;
 	   let expressionString = '';
 	   let result = '';
@@ -123,7 +124,6 @@
 	   inputEl.addEventListener('input',updateCursorPosition);
 	   inputEl.addEventListener('keydown',updateCursorPosition);
 	   inputEl.addEventListener('keyup',updateCursorPosition);
-           // buttons creation
            const handleClick = (event) => {
              event.preventDefault();
              let buttonTextContent = event.target.textContent;
@@ -136,9 +136,11 @@
 		     // evaluate expression
 		     expressionString =  inputEl.value;
 		     result = math.evaluate(expressionString);
+		     ansEl.value = result;
 		     outputEl.value = result;
-	     }
-            else {
+	     } else if (buttonTextContent === 'Ans'){
+		     inputEl.value += event.target.value;
+	     } else {
 		    inputEl.value += buttonTextContent;
             }
            };
